@@ -1,0 +1,30 @@
+/* =========================================================
+   7. ОТЗЫВЫ
+   ========================================================= */
+.ratings{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:34px}
+.rating-pill{
+  display:flex;align-items:center;gap:10px;padding:10px 18px;border-radius:999px;
+  background:var(--cream-2);border:1px solid var(--line);font-size:13px;
+}
+.rating-pill b{font-size:15px}
+.stars{display:inline-flex;gap:2px;color:var(--gold)}
+.stars svg{width:15px;height:15px}
+.reviews-grid{display:grid;gap:18px}
+.review{
+  background:var(--cream-2);border-radius:var(--radius);padding:28px;border:1px solid var(--line);
+  position:relative;transition:transform .4s var(--ease),box-shadow .4s;
+}
+.review:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.review::before{
+  content:"“";position:absolute;top:6px;right:22px;font-family:var(--serif);font-size:90px;line-height:1;color:var(--rose);
+}
+.review p{margin:16px 0 22px;font-size:14.5px}
+.review-author{display:flex;align-items:center;gap:12px;padding-top:18px;border-top:1px solid var(--line)}
+.avatar{
+  width:46px;height:46px;border-radius:50%;display:grid;place-items:center;flex-shrink:0;
+  font-family:var(--serif);font-size:20px;font-weight:600;color:var(--green);
+}
+.review-author b{display:block;font-size:14px}
+.review-author small{color:var(--muted);font-size:12px}
+@media (min-width:700px){.reviews-grid{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1100px){.reviews-grid{grid-template-columns:repeat(4,1fr)}}

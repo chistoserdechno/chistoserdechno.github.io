@@ -1,0 +1,33 @@
+/* =========================================================
+   8. КОМАНДА («Кто будет убирать»)
+   ========================================================= */
+.team{background:var(--green);color:var(--cream);position:relative;overflow:hidden}
+.team .eyebrow{color:var(--sage)}
+.team .section-head p{color:rgba(245,239,229,.72)}
+.counter{
+  display:inline-block;background:var(--gold);color:var(--green);font-weight:600;
+  padding:1px 10px;border-radius:8px;
+}
+.team-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.member{background:rgba(245,239,229,.06);border:1px solid rgba(245,239,229,.12);border-radius:var(--radius);padding:12px;transition:transform .4s var(--ease),background .4s}
+.member:hover{transform:translateY(-6px);background:rgba(245,239,229,.1)}
+.member-photo{aspect-ratio:4/5;border-radius:16px;overflow:hidden;position:relative}
+.member-photo svg{width:100%;height:100%;display:block}
+.member-info{padding:14px 6px 6px}
+.member-info b{font-family:var(--serif);font-size:22px;font-weight:600;display:block;line-height:1.15}
+.member-info .exp{display:inline-block;margin:8px 0;font-size:12px;font-weight:600;color:var(--green);background:var(--sage);padding:3px 10px;border-radius:999px}
+.member-info p{margin:0;font-size:13px;color:rgba(245,239,229,.7);line-height:1.5}
+.guarantees{display:grid;gap:14px;margin-top:44px}
+.guarantee{display:flex;gap:14px;align-items:flex-start;padding:20px;border-radius:var(--radius-sm);border:1px solid rgba(245,239,229,.14)}
+.guarantee svg{width:28px;height:28px;color:var(--gold);flex-shrink:0}
+.guarantee b{display:block;margin-bottom:2px}
+.guarantee span{font-size:13px;color:rgba(245,239,229,.7)}
+@media (min-width:900px){
+  .team-grid{grid-template-columns:repeat(4,1fr);gap:20px}
+  .guarantees{grid-template-columns:repeat(3,1fr)}
+}
+
+/* Команда из трёх, с цитатами */
+@media (min-width:900px){.team-grid{grid-template-columns:repeat(3,1fr);gap:24px}}
+.member-quote{font-family:var(--serif) !important;font-style:italic;font-size:19px !important;line-height:1.35 !important;color:var(--cream) !important;margin-top:4px !important}
+.member-info .exp{font-size:11px}

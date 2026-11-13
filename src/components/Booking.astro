@@ -1,0 +1,31 @@
+---
+import '../styles/sections/booking.css';
+import Icon from './ui/Icon.astro';
+import SectionHead from './ui/SectionHead.astro';
+import BookingForm from './islands/BookingForm';
+import { STEPS, BOOKING_PERKS, unsplash } from '../data/content';
+---
+<section id="booking">
+  <div class="container">
+    <SectionHead eyebrow="Как забронировать" title="Четыре шага до <em>чистого</em> дома" />
+
+    <div class="steps">
+      {STEPS.map((s, i) => (
+        <div class="step reveal"><span class="step-num">{i + 1}</span><div><h3>{s.title}</h3><p>{s.text}</p></div></div>
+      ))}
+    </div>
+
+    <div class="booking-box reveal">
+      <aside class="booking-aside">
+        <h3>Забронируйте уборку</h3>
+        <p>Оставьте заявку — свяжемся, обсудим детали и назовём точную стоимость.</p>
+        <ul>{BOOKING_PERKS.map((p) => <li><Icon name="tick" />{p}</li>)}</ul>
+        <img class="aside-photo" src={unsplash('photo-1563453392212-326f5e854473', 900)} alt="" loading="lazy" onerror="this.remove()" />
+        <svg class="heart-deco" viewBox="0 0 64 52" stroke="var(--gold)" aria-hidden="true"><use href="#logo-mark" /></svg>
+      </aside>
+
+      <!-- Остров: форма заявки. Грузится сразу, когда видна -->
+      <BookingForm client:visible />
+    </div>
+  </div>
+</section>

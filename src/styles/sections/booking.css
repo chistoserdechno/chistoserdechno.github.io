@@ -1,0 +1,77 @@
+/* =========================================================
+   9. КАК ЗАБРОНИРОВАТЬ + ФОРМА
+   ========================================================= */
+.steps{display:grid;gap:26px;margin-bottom:56px;counter-reset:step;position:relative}
+.step{text-align:left;display:flex;gap:18px;align-items:flex-start}
+.step-num{
+  width:64px;height:64px;border-radius:50%;flex-shrink:0;display:grid;place-items:center;
+  background:var(--green);color:var(--cream);font-family:var(--serif);font-size:30px;font-weight:600;
+  box-shadow:0 0 0 8px rgba(47,59,51,.08);position:relative;z-index:1;
+}
+.step h3{font-size:24px;margin:6px 0 6px}
+.step p{margin:0;color:var(--muted);font-size:14px}
+@media (min-width:900px){
+  .steps{grid-template-columns:repeat(4,1fr);gap:20px}
+  .steps::before{ /* соединительная линия между шагами */
+    content:"";position:absolute;top:32px;left:12%;right:12%;height:2px;
+    background:repeating-linear-gradient(90deg,var(--gold) 0 8px,transparent 8px 16px);
+  }
+  .step{flex-direction:column;align-items:center;text-align:center}
+}
+
+.booking-box{
+  display:grid;border-radius:28px;overflow:hidden;box-shadow:var(--shadow-lg);background:var(--cream-2);
+}
+.booking-aside{
+  background:var(--green);color:var(--cream);padding:36px 28px;position:relative;overflow:hidden;
+}
+.booking-aside h3{font-size:36px;margin-bottom:14px}
+.booking-aside p{color:rgba(245,239,229,.75);margin:0 0 24px}
+.booking-aside ul{list-style:none;padding:0;margin:0;display:grid;gap:12px;font-size:14px}
+.booking-aside li{display:flex;gap:10px;align-items:center}
+.booking-aside li svg{width:18px;height:18px;color:var(--gold);flex-shrink:0}
+.booking-aside > *{position:relative;z-index:1}
+.booking-aside .aside-photo{position:absolute;inset:0;z-index:0;width:100%;height:100%;object-fit:cover;opacity:.22;mix-blend-mode:luminosity}
+.booking-aside .heart-deco{position:absolute;right:-30px;bottom:-30px;width:200px;opacity:.18}
+
+.form{padding:32px 24px;display:grid;gap:16px;position:relative}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:13px;font-weight:600}
+.field input,.field select{
+  height:52px;padding:0 18px;border-radius:14px;border:1px solid var(--line);background:#fff;
+  font-size:15px;transition:border-color .25s,box-shadow .25s;appearance:none;-webkit-appearance:none;
+}
+.field select{
+  background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232F3B33' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") right 16px center/18px no-repeat;
+  padding-right:44px;
+}
+.field input:focus,.field select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 4px rgba(198,168,138,.25)}
+.field.invalid input,.field.invalid select{border-color:#B85C5C;box-shadow:0 0 0 4px rgba(184,92,92,.12)}
+.error{font-size:12px;color:#B85C5C;min-height:0;display:none}
+.field.invalid .error{display:block}
+.form-row{display:grid;gap:16px}
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:12px;color:var(--muted)}
+.consent input{width:18px;height:18px;accent-color:var(--green);margin-top:1px;flex-shrink:0}
+.consent.invalid{color:#B85C5C}
+.form .btn{width:100%;height:56px}
+.btn[disabled]{opacity:.7;cursor:wait}
+
+/* Сообщение об успехе */
+.success{
+  position:absolute;inset:0;background:var(--cream-2);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;padding:32px;gap:14px;
+  opacity:0;visibility:hidden;transform:scale(.97);transition:.45s var(--ease);
+}
+.success.show{opacity:1;visibility:visible;transform:none}
+.success-ico{width:76px;height:76px;border-radius:50%;background:var(--green);color:var(--cream);display:grid;place-items:center}
+.success-ico svg{width:36px;height:36px}
+.success h3{font-size:34px}
+.success p{margin:0;color:var(--muted);max-width:340px}
+
+@media (min-width:640px){.form-row{grid-template-columns:1fr 1fr}}
+@media (min-width:900px){
+  .booking-box{grid-template-columns:.85fr 1.15fr}
+  .booking-aside{padding:48px 40px}
+  .form{padding:48px 44px}
+}
+.form-error{margin:0;font-size:13px;color:#B85C5C;text-align:center}

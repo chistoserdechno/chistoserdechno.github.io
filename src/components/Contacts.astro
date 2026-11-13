@@ -1,0 +1,22 @@
+---
+import '../styles/sections/contacts.css';
+import Icon from './ui/Icon.astro';
+import { SITE } from '../data/site';
+---
+<section id="contacts" class="contacts">
+  <div class="container">
+    <div class="contacts-head reveal">
+      <span class="eyebrow">Контакты</span>
+      <h2>Один звонок — <em>и&nbsp;всё&nbsp;в&nbsp;порядке</em></h2>
+      <p>Позвоните или напишите в удобный мессенджер.</p>
+
+      <div class="reach">
+        <a href={SITE.phone.href}><span class="circle"><Icon name="phone" /></span>Позвонить</a>
+        <a href={SITE.links.whatsapp} target="_blank" rel="noopener"><span class="circle"><Icon name="wa" /></span>WhatsApp</a>
+        <a href={SITE.links.telegram} target="_blank" rel="noopener"><span class="circle"><Icon name="tg" /></span>Telegram</a>
+        <a href={SITE.links.max} target="_blank" rel="noopener"><span class="circle"><span class="max-txt">MAX</span></span>MAX</a>
+      </div>
+      <div class="reach-hours"><b>{SITE.phone.display}</b>принимаем заявки {SITE.hours}</div>
+    </div>
+  </div>
+</section>

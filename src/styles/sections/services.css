@@ -1,0 +1,55 @@
+/* =========================================================
+   5. УСЛУГИ
+   ========================================================= */
+.services-grid{display:grid;gap:18px}
+.service-card{
+  background:var(--cream-2);border:1px solid var(--line);border-radius:var(--radius);
+  padding:30px 26px;display:flex;flex-direction:column;
+  transition:transform .4s var(--ease),box-shadow .4s,border-color .4s;
+}
+.service-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:transparent}
+.service-icon{
+  width:60px;height:60px;border-radius:18px;background:var(--cream);border:1px solid var(--line);
+  display:grid;place-items:center;margin-bottom:22px;transition:background .4s,color .4s;
+}
+.service-icon svg{width:30px;height:30px}
+.service-card:hover .service-icon{background:var(--green);color:var(--cream)}
+.service-photo{
+  position:relative;aspect-ratio:16/10;margin:-30px -26px 0;overflow:hidden;
+  border-radius:var(--radius) var(--radius) 0 0;background:var(--rose);
+}
+.service-photo .ph-img{transition:transform .8s var(--ease)}
+.service-card:hover .service-photo .ph-img{transform:scale(1.05)}
+.service-photo + .service-icon{margin-top:-30px;position:relative;z-index:2;background:var(--cream-2);box-shadow:var(--shadow)}
+.service-card.featured .service-photo + .service-icon{background:var(--green)}
+.service-card.featured .tag{position:absolute;top:16px;left:16px;margin:0;z-index:3}
+.service-card{position:relative;overflow:hidden}
+.service-card h3{font-size:28px;margin-bottom:10px}
+.service-card p{color:var(--muted);margin:0 0 22px;font-size:14px;flex-grow:1}
+.service-foot{display:flex;align-items:center;justify-content:space-between;padding-top:18px;border-top:1px solid var(--line)}
+.price{font-family:var(--serif);font-size:26px;font-weight:600}
+.price small{font-family:var(--sans);font-size:12px;font-weight:500;color:var(--muted);margin-right:4px}
+.service-link{
+  width:42px;height:42px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;
+  transition:background .3s,color .3s,transform .3s;
+}
+.service-link svg{width:16px;height:16px}
+.service-card:hover .service-link{background:var(--gold);border-color:var(--gold);transform:rotate(-45deg)}
+.service-card.featured{background:var(--green);color:var(--cream);border-color:var(--green)}
+.service-card.featured p,.service-card.featured .price small{color:rgba(245,239,229,.7)}
+.service-card.featured .service-icon{background:rgba(245,239,229,.08);border-color:rgba(245,239,229,.2)}
+.service-card.featured .service-foot{border-color:rgba(245,239,229,.18)}
+.service-card.featured .service-link{border-color:rgba(245,239,229,.3)}
+.tag{
+  align-self:flex-start;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  padding:5px 12px;border-radius:999px;background:var(--gold);color:var(--green);margin:-8px 0 14px;
+}
+@media (min-width:640px){.services-grid{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1024px){.services-grid{grid-template-columns:repeat(3,1fr)}}
+
+.price .rate{display:block;font-family:var(--sans);font-size:12px;font-weight:500;color:var(--muted);margin-top:2px}
+.service-card.featured .price .rate{color:rgba(245,239,229,.65)}
+.price-text{font-size:22px}
+
+.services-more{margin-top:32px}
+.services-more .btn{width:100%;height:60px}

@@ -1,0 +1,53 @@
+---
+import '../styles/sections/footer.css';
+import Icon from './ui/Icon.astro';
+import Logo from './ui/Logo.astro';
+import { SITE } from '../data/site';
+import { SERVICE_CARDS } from '../data/content';
+const year = new Date().getFullYear();
+---
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <Logo color="var(--gold)" />
+        <p class="footer-about">Семейная служба уборки и бытовых задач в Санкт-Петербурге.</p>
+        <div class="socials">
+          {SITE.links.vk && <a href={SITE.links.vk} aria-label="ВКонтакте"><Icon name="vk" /></a>}
+          <a href={SITE.links.telegram} aria-label="Telegram"><Icon name="tg" /></a>
+          <a href={SITE.links.whatsapp} aria-label="WhatsApp"><Icon name="wa" /></a>
+          <a href={SITE.links.max} aria-label="MAX" class="soc-max">MAX</a>
+        </div>
+      </div>
+      <div>
+        <h4>Услуги</h4>
+        <ul>{SERVICE_CARDS.map((c) => <li><a href="/#services">{c.title}</a></li>)}</ul>
+      </div>
+      <div>
+        <h4>О нас</h4>
+        <ul>
+          <li><a href="/prices">Цены и калькулятор</a></li>
+          <li><a href="/#approach">Наш подход</a></li>
+          <li><a href="/#team">Команда</a></li>
+          <li><a href="/#gifts">Подарочные сертификаты</a></li>
+          <li><a href="/privacy">Политика конфиденциальности</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Связаться</h4>
+        <ul>
+          <li><a href={SITE.phone.href}>{SITE.phone.display}</a></li>
+          <li>Принимаем заявки {SITE.hours}</li>
+          {SITE.email && <li><a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>}
+        </ul>
+        <p style="margin-top:22px"><a href="/#booking" class="btn btn-gold">Забронировать</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© {year} «{SITE.name}» · Самозанятый {SITE.legal.selfEmployed}, ИНН {SITE.legal.inn}</span>
+      <span class="footer-slogan">{SITE.slogan}</span>
+    </div>
+  </div>
+</footer>
+
+<a href={SITE.phone.href} class="fab" aria-label="Позвонить"><Icon name="phone" /></a>

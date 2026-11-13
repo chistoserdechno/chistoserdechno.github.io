@@ -1,0 +1,7 @@
+{
+  "name": "chisto-serdechno-lead",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "description": "Yandex Cloud Function: заявка с сайта → Telegram"
+}

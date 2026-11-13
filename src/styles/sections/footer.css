@@ -1,0 +1,41 @@
+/* граница между зелёной секцией и зелёным подвалом */
+.footer{border-top:1px solid rgba(245,239,229,.12)}
+
+/* =========================================================
+   11. FOOTER
+   ========================================================= */
+.footer{background:var(--green);color:var(--cream);padding:56px 0 28px;position:relative;overflow:hidden}
+.footer-grid{display:grid;gap:36px}
+.footer .logo-tag{color:var(--sage)}
+.footer .logo svg path,.footer .logo svg rect{stroke:var(--gold)}
+.footer-about{color:rgba(245,239,229,.7);font-size:14px;max-width:320px;margin:18px 0 22px}
+.socials{display:flex;gap:10px}
+.socials a{
+  width:44px;height:44px;border-radius:50%;border:1px solid rgba(245,239,229,.25);display:grid;place-items:center;
+  transition:background .3s,border-color .3s,color .3s;
+}
+.socials a:hover{background:var(--gold);border-color:var(--gold);color:var(--green)}
+.socials svg{width:18px;height:18px}
+.footer h4{font-family:var(--sans);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--sage);margin:0 0 16px;font-weight:600}
+.footer ul{list-style:none;padding:0;margin:0;display:grid;gap:10px;font-size:14px}
+.footer ul a{color:rgba(245,239,229,.8);transition:color .25s}
+.footer ul a:hover{color:var(--gold)}
+.footer-bottom{
+  margin-top:44px;padding-top:22px;border-top:1px solid rgba(245,239,229,.14);
+  display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between;font-size:12px;color:rgba(245,239,229,.55);
+}
+.footer-slogan{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--gold)}
+@media (min-width:860px){.footer-grid{grid-template-columns:1.4fr 1fr 1fr 1.2fr}}
+
+/* Плавающая кнопка звонка на мобильных */
+.fab{
+  position:fixed;right:18px;bottom:18px;z-index:40;width:58px;height:58px;border-radius:50%;
+  background:var(--gold);color:var(--green);display:grid;place-items:center;box-shadow:var(--shadow-lg);
+  transition:transform .3s var(--ease);
+}
+.fab:hover{transform:scale(1.08)}
+.fab svg{width:24px;height:24px}
+.fab::before{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--gold);animation:pulse 2.4s infinite}
+@keyframes pulse{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.6);opacity:0}}
+@media (min-width:960px){.fab{right:28px;bottom:28px}}
+.soc-max{font-size:11px;font-weight:700;letter-spacing:.03em}

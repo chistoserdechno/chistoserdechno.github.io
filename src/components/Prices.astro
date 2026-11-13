@@ -1,0 +1,63 @@
+---
+import '../styles/sections/prices.css';
+import SectionHead from './ui/SectionHead.astro';
+import Calculator from './islands/Calculator';
+import { SERVICES, startingPrice } from '../data/prices';
+import { REPAIR, TERMS } from '../data/content';
+import { rub } from '../lib/pricing';
+---
+<section id="prices" class="prices">
+  <div class="container">
+    <SectionHead eyebrow="Цены" title="Сколько <em>стоит</em> уборка" level="h1">
+      <p>Предварительная оценка за минуту. Точную цену назовём по фото: она зависит от того, насколько всё загрязнено.</p>
+    </SectionHead>
+
+    <!-- Остров: React-калькулятор. Загрузит JS, только когда до него доскроллят -->
+    <Calculator client:visible />
+
+    <!-- Полный прайс — статический HTML из prices.ts -->
+    <div class="price-list">
+      {SERVICES.map((s) => (
+        <details class="pl reveal" id={s.id}>
+          <summary>
+            <span class="pl-name">{s.name}</span>
+            <span class="pl-from">от {rub(startingPrice(s))}</span>
+            <span class="pl-chev" aria-hidden="true"></span>
+          </summary>
+          <div class="pl-body">
+            <ul class="pl-prices">
+              {s.pricing.mode === 'rooms'
+                ? <>
+                    {s.pricing.rooms.map((r) => <li><span>{r.label}</span><b>{rub(r.price)}</b></li>)}
+                    <li><span>Сверх лимита площади</span><b>+{s.pricing.overPerM2} ₽/м²</b></li>
+                  </>
+                : <>
+                    <li><span>За м²</span><b>{s.pricing.ratePerM2} ₽</b></li>
+                    <li><span>Минимальный заказ</span><b>{rub(s.pricing.min)}</b></li>
+                  </>}
+            </ul>
+            <div class="pl-incl"><b>Что входит</b><p>{s.includes}</p></div>
+          </div>
+        </details>
+      ))}
+      <details class="pl reveal" id="repair">
+        <summary><span class="pl-name">{REPAIR.name}</span><span class="pl-from">по задаче</span><span class="pl-chev" aria-hidden="true"></span></summary>
+        <div class="pl-body"><div class="pl-incl" style="grid-column:1/-1"><b>Что делаем</b><p>{REPAIR.text}</p></div></div>
+      </details>
+    </div>
+
+    <div class="price-terms reveal">
+      {TERMS.map((t) => <div><b>{t.title}</b><span>{t.text}</span></div>)}
+    </div>
+  </div>
+</section>
+
+<script>
+  // /prices#general → раскрыть строку «Генеральная уборка» и прокрутить к ней
+  const target = location.hash && document.querySelector<HTMLDetailsElement>(`details${location.hash}`);
+  if (target) {
+    target.open = true;
+    // Ждём следующий кадр: раскрытая строка уже имеет итоговую высоту
+    requestAnimationFrame(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+  }
+</script>

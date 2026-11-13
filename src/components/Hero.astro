@@ -1,0 +1,49 @@
+---
+import '../styles/sections/hero.css';
+import Icon from './ui/Icon.astro';
+import { HERO_CHECKS, TRUST, unsplash } from '../data/content';
+---
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="reveal">
+      <span class="eyebrow">Уборка и помощь по дому · Санкт-Петербург</span>
+      <h1>Чисто снаружи.<br /><em>Сердечно</em> внутри.</h1>
+      <p class="hero-lead">Уберём квартиру или офис, а заодно повесим полку и соберём шкаф — за один визит. Работаем сами, честно и бережно, как для своей семьи.</p>
+      <ul class="hero-checks">
+        {HERO_CHECKS.map((t) => <li><Icon name="check" />{t}</li>)}
+      </ul>
+      <div class="hero-actions">
+        <a href="#booking" class="btn btn-primary">Забронировать уборку <Icon name="arrow" /></a>
+        <a href="/prices" class="btn btn-ghost">Рассчитать стоимость</a>
+      </div>
+    </div>
+
+    <div class="hero-visual reveal">
+      <div class="hero-arch">
+        <!-- Нарисованная заглушка под фото: видна, если фото не загрузилось -->
+        <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+          <polygon points="250,0 400,0 400,260 300,310" fill="#fff" opacity=".35" />
+          <ellipse cx="300" cy="372" rx="58" ry="10" fill="#EFE7DA" /><rect x="294" y="372" width="12" height="70" fill="#E5D9C7" />
+          <path d="M40 330c0-40 20-60 60-60h40c40 0 60 20 60 60v40H40z" fill="#F3ECE0" />
+          <rect x="20" y="340" width="200" height="70" rx="34" fill="#FBF7F0" />
+          <rect x="64" y="300" width="70" height="52" rx="18" fill="#6E7D66" />
+        </svg>
+        <img class="ph-img" src={unsplash('photo-1583847268964-b28dc8f51f92', 900)} alt="Светлая уютная гостиная после уборки" loading="eager" onerror="this.remove()" />
+      </div>
+      <div class="hero-badge badge-1">
+        <span class="ico"><Icon name="heart" /></span>
+        <div><b>Семья</b><small>убираем только мы,<br />без субподрядчиков</small></div>
+      </div>
+      <div class="hero-badge badge-2">
+        <span class="ico"><Icon name="tool" /></span>
+        <div><b>2 в 1</b><small>уборка и мелкий ремонт<br />за один визит</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trust-strip">
+  <div class="container trust-grid">
+    {TRUST.map((t) => <div class="trust-item"><Icon name={t.icon} />{t.text}</div>)}
+  </div>
+</div>

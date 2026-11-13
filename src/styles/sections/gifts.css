@@ -1,0 +1,51 @@
+/* Подарочные сертификаты — в стиле фирменной визитки */
+.gifts-section{background:var(--cream);padding:88px 0}
+.gifts{position:relative}
+.gifts-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px 40px;margin-bottom:34px}
+.gifts-head p{margin:0;max-width:420px;color:var(--muted);font-size:14px}
+.gift-grid{display:grid;gap:20px}
+.gift{
+  position:relative;aspect-ratio:1.62/1;border-radius:18px;padding:24px 26px;overflow:hidden;
+  display:flex;flex-direction:column;justify-content:space-between;
+  background:#FFFDF8;color:var(--green);border:1px solid var(--line);
+  box-shadow:0 22px 40px -24px rgba(47,59,51,.45);
+  transition:transform .5s var(--ease),box-shadow .5s;
+}
+.gift:hover{transform:translateY(-6px) rotate(-.6deg);box-shadow:0 30px 50px -22px rgba(47,59,51,.55)}
+/* «тиснёный» знак на фоне карты */
+.gift .emboss{position:absolute;right:-26px;bottom:-30px;width:62%;opacity:.13;color:currentColor;stroke:currentColor;pointer-events:none}
+/* волна снизу, как на визитке */
+.gift::after{
+  content:"";position:absolute;left:-20%;right:-20%;bottom:-62%;height:90%;border-radius:50%;
+  background:var(--sage);opacity:.35;pointer-events:none;
+}
+.gift > *{position:relative;z-index:1}
+.gift-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.gift-brand{display:flex;align-items:center;gap:8px;font-family:var(--serif);font-size:19px;font-weight:600;line-height:1}
+.gift-brand svg{width:30px;height:25px}
+.gift-kind{font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.7;text-align:right;line-height:1.4}
+.gift-value{font-family:var(--serif);font-size:clamp(38px,5vw,48px);font-weight:600;line-height:1}
+.gift-value small{display:block;font-family:var(--sans);font-size:13px;font-weight:500;opacity:.75;margin-top:6px;letter-spacing:.01em}
+.gift-bottom{display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
+.gift-bottom em{font-family:var(--serif);font-size:17px;font-style:italic;opacity:.8}
+.gift-btn{
+  flex-shrink:0;padding:10px 18px;border-radius:999px;font-size:13px;font-weight:600;
+  background:var(--green);color:var(--cream);transition:background .3s,color .3s;
+}
+.gift-btn:hover{background:var(--gold);color:var(--green)}
+/* вариант «тёмная карта» и «золотая» */
+.gift.dark{background:var(--green);color:var(--cream);border:1px solid rgba(198,168,138,.35)}
+.gift.dark .gift-value,.gift.dark .gift-brand{color:var(--gold)}
+.gift.dark::after{background:var(--gold);opacity:.12}
+.gift.dark .gift-btn{background:var(--gold);color:var(--green)}
+.gift.dark .gift-btn:hover{background:var(--cream)}
+.gift.rose{background:var(--rose);border-color:transparent}
+.gift.rose::after{background:var(--cream);opacity:.55}
+.gifts-note{display:flex;flex-wrap:wrap;gap:10px 28px;justify-content:center;margin-top:30px;font-size:13px;color:var(--muted)}
+.gifts-note span{display:inline-flex;align-items:center;gap:8px}
+.gifts-note svg{width:16px;height:16px;color:var(--gold)}
+@media (min-width:760px){.gift-grid{grid-template-columns:repeat(3,1fr)}}
+@media (min-width:760px) and (max-width:1060px){.gift{aspect-ratio:auto;min-height:230px}}
+
+
+.gifts-custom{text-align:center;color:var(--muted);font-size:14px;max-width:640px;margin:28px auto 0}

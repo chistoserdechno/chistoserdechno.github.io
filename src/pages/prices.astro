@@ -1,0 +1,17 @@
+---
+// Отдельная страница: калькулятор, полный прайс, условия оплаты
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Prices from '../components/Prices.astro';
+import Footer from '../components/Footer.astro';
+---
+<Layout
+  title="Цены на уборку — Чистосердечно"
+  description="Цены на поддерживающую и генеральную уборку, уборку после ремонта, посуточных квартир и офисов в Санкт-Петербурге. Калькулятор стоимости."
+>
+  <Header />
+  <main id="top">
+    <Prices />
+  </main>
+  <Footer />
+</Layout>

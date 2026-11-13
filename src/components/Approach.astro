@@ -1,0 +1,31 @@
+---
+import '../styles/sections/approach.css';
+import SectionHead from './ui/SectionHead.astro';
+import { MISSION, VALUES, STOP_LIST } from '../data/content';
+// Выделяем «честно и бережно» в миссии
+const mission = MISSION.replace('честно и бережно', '<em>честно и бережно</em>');
+---
+<section id="approach">
+  <div class="container">
+    <SectionHead eyebrow="Наш подход" />
+    <p class="mission reveal" set:html={mission} />
+
+    <div class="values">
+      {VALUES.map((v, i) => (
+        <article class="value reveal">
+          <span class="num">{String(i + 1).padStart(2, '0')}</span>
+          <h3>{v.title}</h3>
+          <p>{v.text}</p>
+        </article>
+      ))}
+    </div>
+
+    <details class="stop reveal">
+      <summary>За что мы не берёмся <span>и почему</span></summary>
+      <p class="stop-lead">{STOP_LIST.lead}</p>
+      <ul class="stop-list">
+        {STOP_LIST.items.map((it) => <li><b>{it.title}</b> {it.text}</li>)}
+      </ul>
+    </details>
+  </div>
+</section>

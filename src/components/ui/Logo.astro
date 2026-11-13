@@ -1,0 +1,13 @@
+---
+import { SITE } from '../../data/site';
+interface Props { color?: string }
+const { color = 'var(--green)' } = Astro.props;
+const href = Astro.url.pathname === '/' ? '#top' : '/';
+---
+<a href="/" class="logo" aria-label={`${SITE.name} — на главную`}>
+  <svg style={`color:${color}`} stroke={color} aria-hidden="true"><use href="#logo-mark" /></svg>
+  <span class="logo-text">
+    <span class="logo-name">{SITE.name}</span>
+    <span class="logo-tag">{SITE.tagline}</span>
+  </span>
+</a>

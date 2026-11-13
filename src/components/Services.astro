@@ -1,0 +1,42 @@
+---
+import '../styles/sections/services.css';
+import Icon from './ui/Icon.astro';
+import SectionHead from './ui/SectionHead.astro';
+import { SERVICE_CARDS, REPAIR } from '../data/content';
+import { getService, startingPrice } from '../data/prices';
+import { rub } from '../lib/pricing';
+
+// Цена «от …» и название для формы берутся из prices.ts — здесь их не дублируем
+const cards = SERVICE_CARDS.map((c) => {
+  if (c.serviceId === 'repair') return { ...c, price: null, formName: REPAIR.formName };
+  const s = getService(c.serviceId);
+  return { ...c, price: startingPrice(s), formName: s.formName };
+});
+---
+<section id="services">
+  <div class="container">
+    <SectionHead eyebrow="Услуги" title="Чем мы <em>поможем</em>">
+      <p>Расскажите, что нужно. Назовём цену заранее и сделаем на совесть.</p>
+    </SectionHead>
+
+    <div class="services-grid">
+      {cards.map((c) => (
+        <article class:list={['service-card', 'reveal', { featured: c.featured }]}>
+          {c.tag && <span class="tag">{c.tag}</span>}
+          <div class="service-photo"><img class="ph-img" src={c.photo} alt={c.title} loading="lazy" onerror="this.remove()" /></div>
+          <div class="service-icon"><Icon name={c.icon} /></div>
+          <h3>{c.title}</h3>
+          <p>{c.text}</p>
+          <div class="service-foot">
+            {c.price
+              ? <span class="price"><small>от</small>{rub(c.price)}<span class="rate">{c.note}</span></span>
+              : <span class="price price-text">Цена по задаче<span class="rate">{c.note}</span></span>}
+<a href={`/prices#${c.serviceId}`} class="service-link" aria-label={`Подробнее: ${c.title}`}><Icon name="arrow" /></a>          </div>
+        </article>
+      ))}
+    </div>
+    <div class="services-more reveal">
+      <a href="/prices" class="btn btn-ghost">Все цены и калькулятор</a>
+    </div>
+  </div>
+</section>

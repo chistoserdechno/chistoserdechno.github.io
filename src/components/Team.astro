@@ -1,0 +1,41 @@
+---
+import '../styles/sections/team.css';
+import Icon from './ui/Icon.astro';
+import SectionHead from './ui/SectionHead.astro';
+import { TEAM, GUARANTEES } from '../data/content';
+---
+<section id="team" class="team">
+  <div class="container">
+    <SectionHead eyebrow="Кто будет убирать" title="Люди, которым <em>можно доверить</em> ключи">
+      <p>Нас трое: {TEAM.map((m) => m.name).join(', ').replace(/, ([^,]*)$/, ' и $1')}. И каждый из нас занимается именно тем, что любит и умеет лучше всего.</p>
+    </SectionHead>
+
+    <div class="team-grid">
+      {TEAM.map((m, i) => (
+        <article class="member reveal">
+          <div class="member-photo">
+            <!-- Силуэт-заглушка: виден, если фото не загрузилось -->
+            <svg viewBox="0 0 200 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <defs><linearGradient id={`mg${i}`} x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color={m.tone[0]} /><stop offset="1" stop-color={m.tone[1]} /></linearGradient></defs>
+              <rect width="200" height="250" fill={`url(#mg${i})`} />
+              <circle cx="100" cy="92" r="36" fill="#F5EFE5" opacity=".95" />
+              <path d="M30 250c0-55 30-88 70-88s70 33 70 88z" fill="#F5EFE5" opacity=".95" />
+              <path d="M62 250v-62c10-12 24-18 38-18s28 6 38 18v62z" fill="#2F3B33" />
+            </svg>
+            <img class="ph-img" src={m.photo} alt={m.name} loading="lazy" onerror="this.remove()" />
+          </div>
+          <div class="member-info">
+            <b>{m.name}</b><span class="exp">{m.role}</span>
+            <p class="member-quote">«{m.quote}»</p>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div class="guarantees">
+      {GUARANTEES.map((g) => (
+        <div class="guarantee reveal"><Icon name={g.icon} /><div><b>{g.title}</b><span>{g.text}</span></div></div>
+      ))}
+    </div>
+  </div>
+</section>

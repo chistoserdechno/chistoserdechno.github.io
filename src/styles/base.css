@@ -1,0 +1,87 @@
+/* Токены бренда, база, кнопки, общие утилиты */
+/* =========================================================
+   1. ДИЗАЙН-ТОКЕНЫ (палитра из брендбука)
+   ========================================================= */
+:root{
+  --green:#2F3B33;      /* основной тёмно-зелёный */
+  --green-2:#3B4A40;    /* чуть светлее для hover */
+  --cream:#F5EFE5;      /* фон */
+  --cream-2:#FBF8F2;    /* светлые карточки */
+  --gold:#C6A88A;       /* бежево-золотой акцент */
+  --sage:#A8B09A;       /* шалфей */
+  --rose:#E7D6D6;       /* пудровый */
+  --text:#2F3B33;
+  --muted:#6B7268;
+  --line:rgba(47,59,51,.14);
+
+  --serif:'Cormorant Garamond', Georgia, serif;
+  --sans:'Montserrat', system-ui, -apple-system, sans-serif;
+
+  --radius:22px;
+  --radius-sm:14px;
+  --shadow:0 10px 30px -12px rgba(47,59,51,.22);
+  --shadow-lg:0 24px 50px -20px rgba(47,59,51,.35);
+  --ease:cubic-bezier(.22,.7,.3,1);
+  --container:1180px;
+}
+
+/* =========================================================
+   2. БАЗА (mobile-first)
+   ========================================================= */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{
+  margin:0;font-family:var(--sans);font-size:15px;line-height:1.65;
+  color:var(--text);background:var(--cream);
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit;color:inherit}
+.container{width:100%;max-width:var(--container);margin:0 auto;padding:0 20px}
+section{padding:72px 0}
+
+h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.1;margin:0}
+h2{font-size:clamp(34px,6vw,52px)}
+h2 em,h1 em{font-style:italic;color:var(--gold)}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:12px;
+  font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;
+}
+.eyebrow::before{content:"";width:28px;height:1px;background:currentColor}
+.section-head{max-width:640px;margin-bottom:44px}
+.section-head p{color:var(--muted);margin:16px 0 0}
+
+/* Кнопки */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  padding:15px 28px;border-radius:999px;border:1px solid transparent;
+  font-weight:600;font-size:14px;letter-spacing:.02em;cursor:pointer;
+  transition:transform .3s var(--ease),background .3s,box-shadow .3s,color .3s;
+}
+.btn-primary{background:var(--green);color:var(--cream)}
+.btn-primary:hover{background:var(--green-2);transform:translateY(-2px);box-shadow:var(--shadow)}
+.btn-gold{background:var(--gold);color:var(--green)}
+.btn-gold:hover{background:#d3b797;transform:translateY(-2px);box-shadow:var(--shadow)}
+.btn-ghost{border-color:var(--green);color:var(--green);background:transparent}
+.btn-ghost:hover{background:var(--green);color:var(--cream)}
+.btn svg{width:18px;height:18px}
+
+/* Анимация появления при скролле */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.reveal.visible{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none;transition:none}
+}
+
+/* Фото поверх нарисованной заглушки: если фото не загрузилось, onerror убирает <img> */
+.ph-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+[hidden]{display:none !important}
+.text-link{color:var(--green);font-weight:600;border-bottom:1px solid var(--gold);white-space:nowrap}
+.text-link:hover{color:var(--gold)}
+.btn-ghost-light{border:1px solid rgba(245,239,229,.35);color:var(--cream);background:transparent}
+.btn-ghost-light:hover{background:var(--cream);color:var(--green)}
+
+/* Cormorant по умолчанию рисует «старостильные» цифры (3 5oo) — для цен включаем обычные */
+body{font-variant-numeric:lining-nums}

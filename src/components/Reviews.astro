@@ -1,0 +1,26 @@
+---
+// Отзывы. Не выводится, пока REVIEWS пустой (см. data/content.ts)
+import '../styles/sections/reviews.css';
+import SectionHead from './ui/SectionHead.astro';
+import { REVIEWS } from '../data/content';
+const colors = ['var(--rose)', 'var(--sage)', 'var(--gold)', '#D8DDD0'];
+---
+{REVIEWS.length > 0 && (
+  <section id="reviews">
+    <div class="container">
+      <SectionHead eyebrow="Отзывы" title="Нам <em>доверяют</em> дом" />
+      <div class="reviews-grid">
+        {REVIEWS.map((r, i) => (
+          <article class="review reveal">
+            <span class="stars" aria-label="Оценка 5 из 5">{[0,1,2,3,4].map(() => <svg aria-hidden="true"><use href="#i-star" /></svg>)}</span>
+            <p>{r.text}</p>
+            <div class="review-author">
+              <span class="avatar" style={`background:${colors[i % colors.length]}`}>{r.name[0]}</span>
+              <div><b>{r.name}</b><small>{r.meta}</small></div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+)}

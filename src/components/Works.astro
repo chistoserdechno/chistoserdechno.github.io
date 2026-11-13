@@ -1,0 +1,44 @@
+---
+// Примеры «до/после». Не выводится, пока WORKS пустой (см. data/content.ts)
+import '../styles/sections/works.css';
+import Icon from './ui/Icon.astro';
+import SectionHead from './ui/SectionHead.astro';
+import { WORKS } from '../data/content';
+---
+{WORKS.length > 0 && (
+  <section id="works" class="works">
+    <div class="container">
+      <SectionHead eyebrow="Примеры работ" title="Было <em>—</em> стало">
+        <p>Потяните разделитель на фото, чтобы сравнить результат.</p>
+      </SectionHead>
+      <div class="works-grid">
+        {WORKS.map((w) => (
+          <article class="work-card reveal">
+            <div class="ba">
+              <div class="ba-layer ba-before"><img class="ph-img" src={w.before} alt={`${w.title} — до`} loading="lazy" /><span class="ba-label">До</span></div>
+              <div class="ba-layer ba-after"><img class="ph-img" src={w.after} alt={`${w.title} — после`} loading="lazy" /><span class="ba-label">После</span></div>
+              <span class="ba-handle"></span>
+              <input type="range" min="0" max="100" value="50" aria-label={`Сравнить до и после: ${w.title}`} />
+            </div>
+            <div class="work-info">
+              <h3>{w.title}</h3>
+              <div class="work-meta">
+                <span><Icon name="ruble" />Цена: <b>{w.price}</b></span>
+                <span><Icon name="clock" />Срок: <b>{w.time}</b></span>
+                <span><Icon name="area" />Площадь: <b>{w.area}</b></span>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+)}
+
+<script>
+  // Слайдер «до/после»: двигаем границу через CSS-переменную
+  document.querySelectorAll<HTMLElement>('.ba').forEach((ba) => {
+    const range = ba.querySelector('input')!;
+    range.addEventListener('input', () => ba.style.setProperty('--pos', range.value + '%'));
+  });
+</script>

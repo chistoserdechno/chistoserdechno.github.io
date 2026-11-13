@@ -1,0 +1,38 @@
+---
+import '../styles/sections/gifts.css';
+import Icon from './ui/Icon.astro';
+import { GIFTS } from '../data/content';
+import { rub } from '../lib/pricing';
+---
+<section id="gifts" class="gifts-section">
+  <div class="container">
+    <div class="gifts">
+      <div class="gifts-head reveal">
+        <div><span class="eyebrow">Подарочные сертификаты</span><h2>Подарите <em>чистый дом</em></h2></div>
+        <p>{GIFTS.lead}</p>
+      </div>
+
+      <div class="gift-grid">
+        {GIFTS.cards.map((g) => {
+          const accent = g.variant === 'dark' ? 'var(--gold)' : 'var(--green)';
+          return (
+            <article class:list={['gift', 'reveal', { dark: g.variant === 'dark', rose: g.variant === 'rose' }]}>
+              <svg class="emboss" viewBox="0 0 64 52" style={g.variant === 'dark' ? 'color:var(--gold)' : ''} aria-hidden="true"><use href="#logo-mark" /></svg>
+              <div class="gift-top">
+                <span class="gift-brand"><svg stroke="currentColor" style={`color:${accent}`} aria-hidden="true"><use href="#logo-mark" /></svg>Чистосердечно</span>
+                <span class="gift-kind">Подарочный<br />сертификат</span>
+              </div>
+              <div class="gift-value">{rub(g.value)}<small>{g.note}</small></div>
+              <div class="gift-bottom"><em>{g.caption}</em><a href="#booking" class="gift-btn" data-service="Подарочный сертификат">Подарить</a></div>
+            </article>
+          );
+        })}
+      </div>
+
+      <p class="gifts-custom reveal">{GIFTS.custom}</p>
+      <div class="gifts-note reveal">
+        {GIFTS.terms.map((t) => <span><Icon name="tick" />{t}</span>)}
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,80 @@
+---
+// Каркас страницы: <head>, шрифты, общие стили, спрайт иконок и общие скрипты
+import '@fontsource/cormorant-garamond/500.css';
+import '@fontsource/cormorant-garamond/600.css';
+import '@fontsource/cormorant-garamond/500-italic.css';
+import '@fontsource/montserrat/400.css';
+import '@fontsource/montserrat/500.css';
+import '@fontsource/montserrat/600.css';
+import '@fontsource/montserrat/700.css';
+import '../styles/base.css';
+
+import cormorant500 from '@fontsource/cormorant-garamond/files/cormorant-garamond-cyrillic-500-normal.woff2?url';
+import cormorant500i from '@fontsource/cormorant-garamond/files/cormorant-garamond-cyrillic-500-italic.woff2?url';
+import cormorant600 from '@fontsource/cormorant-garamond/files/cormorant-garamond-cyrillic-600-normal.woff2?url';
+import montserrat400 from '@fontsource/montserrat/files/montserrat-cyrillic-400-normal.woff2?url';
+import montserrat600 from '@fontsource/montserrat/files/montserrat-cyrillic-600-normal.woff2?url';
+
+import Icons from '../components/Icons.astro';
+import { SITE } from '../data/site';
+
+interface Props { title?: string; description?: string }
+const { title = `${SITE.name} — семейная служба уборки в Петербурге`, description = SITE.description } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const preloadFonts = [cormorant500, cormorant500i, cormorant600, montserrat400, montserrat600];
+---
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    {preloadFonts.map((href) => <link rel="preload" href={href} as="font" type="font/woff2" crossorigin />)}
+    <meta name="theme-color" content="#2F3B33" />
+    <!-- Превью ссылки в мессенджерах. TODO: добавить картинку public/og.jpg 1200×630 и og:image -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content="ru_RU" />
+    <!-- TODO: счётчик Яндекс Метрики -->
+  </head>
+  <body>
+    <Icons />
+    <slot />
+
+    <script>
+      import { selectService } from '../lib/events';
+
+      // Плавное появление блоков при скролле
+      const io = new IntersectionObserver(
+        (entries) => entries.forEach((en) => {
+          if (!en.isIntersecting) return;
+          en.target.classList.add('visible');
+          io.unobserve(en.target);
+        }),
+        { threshold: 0.12, rootMargin: '0px 0px -40px 0px' },
+      );
+      document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+      // Клик по карточке услуги или сертификату → подставить услугу в форму заявки
+      document.addEventListener('click', (e) => {
+        const el = (e.target as HTMLElement).closest<HTMLElement>('[data-service]');
+        if (el?.dataset.service) selectService(el.dataset.service);
+      });
+
+            // Клик по логотипу на главной → плавно наверх, без перезагрузки и без #top в адресе
+      document.querySelectorAll<HTMLAnchorElement>('a.logo').forEach((logo) => {
+        logo.addEventListener('click', (e) => {
+          if (location.pathname !== '/') return; // на других страницах — обычный переход на главную
+          e.preventDefault();
+          const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+          window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+          history.replaceState(null, '', '/'); // убираем #… из адреса, если был
+        });
+      });
+    </script>
+  </body>
+</html>
