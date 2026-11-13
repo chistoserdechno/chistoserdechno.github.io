@@ -5,6 +5,7 @@ import Logo from '../components/ui/Logo.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/sections/header.css';
 import { SITE } from '../data/site';
+import '../styles/sections/legal.css';
 ---
 <Layout title={`Политика конфиденциальности — ${SITE.name}`}>
   <header class="header scrolled">
@@ -40,10 +41,4 @@ import { SITE } from '../data/site';
   <Footer />
 </Layout>
 
-<style>
-  .legal { max-width: 760px; padding-top: 48px; padding-bottom: 88px; }
-  .legal h1 { font-size: clamp(36px, 6vw, 52px); margin-bottom: 8px; }
-  .legal h2 { font-size: 28px; margin: 36px 0 10px; }
-  .legal p { color: var(--text); }
-  .legal-note { margin-top: 40px; padding: 18px 20px; border-radius: 14px; background: var(--rose); font-size: 14px; }
-</style>
+

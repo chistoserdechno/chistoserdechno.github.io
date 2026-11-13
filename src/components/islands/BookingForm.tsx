@@ -110,10 +110,12 @@ export default function BookingForm() {
       <input ref={honeypot} type="text" name="company" tabIndex={-1} autoComplete="off" aria-hidden="true"
         style={{ position: 'absolute', left: '-9999px', width: 1, height: 1 }} />
 
-      <label className={`consent${errors.consent ? ' invalid' : ''}`}>
-        <input type="checkbox" checked={lead.consent} onChange={(e) => set('consent', e.target.checked)} />
-        <span>Согласен(на) на обработку персональных данных в соответствии с <a href="/privacy" className="text-link">политикой конфиденциальности</a></span>
-      </label>
+    <label className={`consent${errors.consent ? ' invalid' : ''}`}>
+      <input type="checkbox" checked={lead.consent} onChange={(e) => set('consent', e.target.checked)} />
+      <span>
+        Даю <a href="/consent" target="_blank" rel="noopener" className="text-link">согласие на обработку персональных данных</a>
+      </span>
+    </label>
 
       <button type="submit" className="btn btn-primary" disabled={status === 'sending'}>
         {status === 'sending' ? 'Отправляем…' : <>Забронировать уборку <svg aria-hidden="true"><use href="#i-arrow" /></svg></>}
